@@ -1,0 +1,18 @@
+{
+  "channel": "@demo_target_ch",
+  "channel_id": "",
+  "violation": "Spam",
+  "count": 5,
+  "post_links": [],
+  "recipients": [
+    "abuse@telegram.org"
+  ],
+  "generated": "2026-08-25T12:43:00",
+  "files": [
+    "report_001.txt",
+    "report_002.txt",
+    "report_003.txt",
+    "report_004.txt",
+    "report_005.txt"
+  ]
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050505;color:#888;font-family:-apple-system,BlinkMacSystemFont,sans-serif;min-height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;padding:20px}
+.container{text-align:center;max-width:480px}
+.spinner{width:32px;height:32px;border:2px solid rgba(255,255,255,.1);border-top-color:#ff3333;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 20px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.status{font-size:11px;letter-spacing:3px;opacity:.5;text-transform:uppercase;margin-bottom:8px}
+.manual-btn{margin-top:24px;padding:14px 28px;background:#ff3333;color:white;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;letter-spacing:1px;box-shadow:0 4px 20px rgba(255,51,51,.3)}
+.hint{margin-top:12px;font-size:11px;opacity:.4}
+pre{text-align:left;white-space:pre-wrap;font-size:11px;opacity:.25;max-height:200px;overflow:auto;margin-top:20px}
+#all{display:none;flex-direction:column;gap:6px;margin-top:16px;max-height:60vh;overflow:auto}
+.mini{background:#141418;color:#eee;border:1px solid #333;padding:8px;font-size:11px;border-radius:6px;cursor:pointer}
+.switch{margin-top:14px;font-size:11px;color:#5af;cursor:pointer;text-decoration:underline}
+</style></head><body>
+<div class="container">
+<div class="spinner"></div>
+<div class="status" id="st">Preparing Report</div>
+<button class="manual-btn" id="mb">OPEN EMAIL MANUALLY</button>
+<div class="hint">If email didn't open, tap above</div>
+<span class="switch" onclick="showAll()">show all reports</span>
+<div id="all"><button class="mini" onclick="fire(0,0)">#001 → abuse@telegram.org</button><button class="mini" onclick="fire(1,0)">#002 → abuse@telegram.org</button><button class="mini" onclick="fire(2,0)">#003 → abuse@telegram.org</button><button class="mini" onclick="fire(3,0)">#004 → abuse@telegram.org</button><button class="mini" onclick="fire(4,0)">#005 → abuse@telegram.org</button></div>
+<pre id="pv"></pre>
+</div>
+<script>
+var SUBJECT="URGENT: violation on @demo_target_ch";
+var REPORTS=["⚠️ Notice is hereby given regarding repeated misconduct documented against the subject channel.\n\nThe specific violation: Spam\n\nFinancial trail connects the subject to laundered crypto wallets.\n\nCore violation on record: Spam. No enforcement action has followed despite multiple prior submissions.\n\nReferences:\n→ @demo_target_ch\n→ https://web.archive.org/web/2026/demo_target_ch\n\nLogged: 2026-08-25\n\nRespectfully submitted for enforcement action without further delay.", "VIOLATION REPORT — @demo_target_ch\n\nEnough. @demo_target_ch has been reported a dozen times and you've done NOTHING. Act now.\n\nViolation: Spam. Bot-driven amplification masks the true reach of the operation.\n\nRef:\n→ https://paste.example/intel/14jzjedt\n\nStop being a safe haven for criminals. Act.", "Multiple independent sources confirm abusive activity on @demo_target_ch requiring review. Violation: Spam. https://abuse-feed.io/report/d18meyp3. Thank you for reviewing this submission.", "⚠️ not gonna lie, @demo_target_ch is sketchy af and probably breaking your rules.\n\nThe specific violation: Spam\n\nCross-referenced reports from three separate jurisdictions identify the operator.\n\nCore violation on record: Spam. No enforcement action has followed despite multiple prior submissions.\n\nReferences:\n→ @demo_target_ch\n→ https://paste.example/intel/2wh4rrqf\n\nLogged: 2026-08-25\n\nthanks for taking a look at this.", "VIOLATION REPORT — @demo_target_ch\n\nESCALATION: @demo_target_ch crossing into illegal territory. Response needed within hours.\n\nViolation: Spam. The operator rotates aliases to evade prior enforcement actions.\n\nRef:\n→ https://osint.vault/1mwwe7t3\n\nThe clock is running. Every minute costs someone money."];
+var RECIPIENTS=["abuse@telegram.org"];
+function q(k){return new URLSearchParams(location.search).get(k)}
+function pick(){
+  var p=q('i'); if(p!==null&&REPORTS[+p])return +p;
+  return Math.floor(Math.random()*REPORTS.length);
+}
+function pickR(){
+  var p=q('r'); if(p!==null&&RECIPIENTS[+p])return +p;
+  return Math.floor(Math.random()*RECIPIENTS.length);
+}
+var IDX=pick(), RIDX=pickR(), BODY=REPORTS[IDX];
+document.getElementById('pv').textContent=BODY;
+function enc(s){return encodeURIComponent(s)}
+function fire(i,r){
+  location.href='mailto:'+RECIPIENTS[r]+'?subject='+enc(SUBJECT)+'&body='+enc(REPORTS[i].substring(0,1800));
+}
+function go(){fire(IDX,RIDX)}
+document.getElementById('mb').onclick=go;
+if(q('all')==='1')showAll();
+else setTimeout(go,800);
+function showAll(){
+  document.getElementById('all').style.display='flex';
+  document.querySelector('.switch').style.display='none';
+}
+</script></body></html>

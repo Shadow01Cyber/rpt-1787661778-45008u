@@ -1,0 +1,10 @@
+VIOLATION REPORT — @demo_target_ch
+
+ESCALATION: @demo_target_ch crossing into illegal territory. Response needed within hours.
+
+Violation: Spam. The operator rotates aliases to evade prior enforcement actions.
+
+Ref:
+→ https://osint.vault/1mwwe7t3
+
+The clock is running. Every minute costs someone money.
